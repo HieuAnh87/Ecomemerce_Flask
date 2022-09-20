@@ -9,4 +9,4 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 
-from src.shop import routes
+from src.admin import routes
