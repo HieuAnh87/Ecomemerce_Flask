@@ -1,16 +1,18 @@
-from wtforms import StringField, PasswordField, Form, validators
+from wtforms import StringField, PasswordField, Form, SubmitField
+from wtforms.validators import InputRequired, Email, EqualTo
 
 
 class RegistrationForm(Form):
     name = StringField('Name',
-                       [validators.InputRequired("Please enter your name")])
+                       [InputRequired("Please enter your name")])
     username = StringField('Username',
-                           [validators.InputRequired("Please enter your username")])
+                           [InputRequired("Please enter your username")])
     email = StringField('Email',
-                        [validators.InputRequired("Please fill your email address"),
-                         validators.Email("Please enter your email!")])
+                       [InputRequired("Please fill your email address"),
+                        Email("Please enter your email!")])
     password = PasswordField('Password',
-                             [validators.InputRequired(),
-                              validators.EqualTo('confirm_password', message="Password not match!")])
+                             [InputRequired(),
+                              EqualTo('confirm_password', message="Password not match!")])
     confirm_password = PasswordField('Confirm Password',
-                                     [validators.InputRequired()])
+                                     [InputRequired()])
+    submit = SubmitField()
