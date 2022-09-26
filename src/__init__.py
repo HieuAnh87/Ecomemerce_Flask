@@ -11,3 +11,4 @@ app.config["SECRET_KEY"] = 'abcdefghijklmnop123'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 from src.admin import routes
+from src.products import routes
