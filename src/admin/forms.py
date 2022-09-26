@@ -8,11 +8,17 @@ class RegistrationForm(Form):
     username = StringField('Username',
                            [InputRequired("Please enter your username")])
     email = StringField('Email',
-                       [InputRequired("Please fill your email address"),
-                        Email("Please enter your email!")])
+                        [InputRequired("Please fill your email address"),
+                         Email("Please enter your email!")])
     password = PasswordField('Password',
                              [InputRequired(),
                               EqualTo('confirm_password', message="Password not match!")])
     confirm_password = PasswordField('Confirm Password',
                                      [InputRequired()])
-    submit = SubmitField()
+
+
+class LoginForm(Form):
+    email = StringField('Email',
+                        [InputRequired("Please fill your email address"),
+                         Email("Please enter your email!")])
+    password = PasswordField('Password', [InputRequired()])
