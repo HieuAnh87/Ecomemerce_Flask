@@ -1,0 +1,4 @@
+1. Cach test database sqlite:
+- sqlite3 <ten db>
+- .table
+- pragma table_info(ten table)
