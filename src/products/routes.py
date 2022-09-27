@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, session, url_for, Flask, flash
 from src import app, db
+from .forms import Addproducts
 from .models import Brand, Category
 
 
@@ -19,9 +20,19 @@ def addbrand():
 def addcategory():
     if request.method == "POST":
         getcategory = request.form.get('category')
-        category = Brand(name=getcategory)
+        category = Category(name=getcategory)
         db.session.add(category)
         db.session.commit()
         flash(f'The categpry {getcategory} was added to your database!', 'success')
         return redirect(url_for('addcategory'))
     return render_template('products/addbrand.html', category='category')
+
+
+@app.route('/addproduct', methods=['POST', 'GET'])
+def addproduct():
+    brands = Brand.query.all()
+    categories = Category.query.all()
+    form = Addproducts(request.form)
+
+    return render_template('products/addproduct.html', title="Add Product page", form=form, brands=brands,
+                           categories=categories)
