@@ -1,6 +1,6 @@
 from flask import render_template, flash, request, redirect, url_for, session
 
-from src.products.models import Addproduct
+from src.products.models import Addproduct, Brand, Category
 from src import app, db, bcrypt
 from admin.forms import RegistrationForm, LoginForm
 from .model import User
@@ -13,6 +13,24 @@ def admin():
         return redirect(url_for('login'))
     products = Addproduct.query.all()
     return render_template('admin/index.html', title='Admin Page', products=products)
+
+
+@app.route('/brands', methods=['GET', 'POST'])
+def brands():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
+    brands = Brand.query.order_by(Brand.id.desc()).all()
+    return render_template('admin/brand.html', title='Brand Page', brands=brands)
+
+
+@app.route('/categories', methods=['GET', 'POST'])
+def categories():
+    if 'email' not in session:
+        flash('Please login first!', 'danger')
+        return redirect(url_for('login'))
+    categories = Category.query.order_by(Category.id.desc()).all()
+    return render_template('admin/brand.html', title='Category Page', categories=categories)
 
 
 @app.route('/register', methods=['GET', 'POST'])
